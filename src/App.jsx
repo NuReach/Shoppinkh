@@ -11,6 +11,7 @@ import Profile from "./Pages/Profile";
 import SearchResult from "./Pages/SearchResult";
 import OrderDetail from "./Pages/OrderDetail";
 import Order from "./Pages/Order";
+import Paypal from "./Pages/Paypal";
 function App() {
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -26,6 +27,7 @@ function App() {
         <Route path="/products/search/:search" element={<SearchResult />} />
         <Route path="/orderDetail" element={<OrderDetail />} />
         <Route path="/order" element={<Order />} />
+        {/* <Route path="/order/paypal" element={<Paypal />} /> */}
       </Routes>
     </BrowserRouter>
   );

@@ -7,6 +7,7 @@ import axios from "axios";
 import { Store } from "../Store";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Paypal from "./Paypal";
 
 function OrderDetail() {
   const [firstName, setfirstname] = useState("");
@@ -19,30 +20,31 @@ function OrderDetail() {
   const { state, dispatch: ctxDisptach } = useContext(Store);
   const { userInfo } = state;
   const navigate = useNavigate();
-  const handleSubmit = async (e) => {
-    try {
-      const { data } = axios.post(
-        `http://localhost:5454/api/orders/`,
-        {
-          firstName,
-          lastName,
-          streetAddress,
-          city,
-          state: state1,
-          zipCode,
-          mobile,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${userInfo.jwt}`,
-          },
-        }
-      );
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   try {
+  //     const { data } = axios.post(
+  //       `http://localhost:5454/api/orders/`,
+  //       {
+  //         firstName,
+  //         lastName,
+  //         streetAddress,
+  //         city,
+  //         state: state1,
+  //         zipCode,
+  //         mobile,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${userInfo.jwt}`,
+  //         },
+  //       }
+  //     );
+  //     navigate(
+  //       `/order/paypal?firtName=${firstName}&lastName=${lastName}&streetAddress=${streetAddress}&city=${city}&state=${state1}$mobile=${mobile}`
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <div>
       <TopBar />
@@ -51,7 +53,7 @@ function OrderDetail() {
         <div className="font-bold text-3xl my-12">
           Input your inforhtmlmation
         </div>
-        <form className=" w-96" onSubmit={handleSubmit}>
+        <form className=" w-96">
           <div className="mb-6">
             <label
               forhtml="firstName"
@@ -164,12 +166,14 @@ function OrderDetail() {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Submit
-          </button>
+          <Paypal
+            firstName={firstName}
+            lastName={lastName}
+            city={city}
+            zipCode={zipCode}
+            state1={state1}
+            streetAddress={streetAddress}
+          />
         </form>
       </div>
       <Footer />
