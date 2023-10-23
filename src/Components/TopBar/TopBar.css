@@ -1,0 +1,10 @@
+
+.each-slide-effect > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    height: 42px;
+    color: white;
+    background-image: linear-gradient(to right, rgb(230, 90, 136) , rgb(232, 85, 225));
+  }
